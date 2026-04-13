@@ -64,6 +64,10 @@
   .nav-links { display: flex; gap: 26px; align-items: center; }
   .nav-links a { font-weight: 500; font-size: 15px; color: var(--ink-soft); }
   .nav-links a:hover { color: var(--green-deep); text-decoration: none; }
+  .nav-links a.btn-primary { color: var(--cream); }
+  .nav-links a.btn-primary:hover { color: var(--cream); }
+  .nav-links a.btn-mustard { color: var(--ink); }
+  .nav-links a.btn-mustard:hover { color: var(--ink); }
   @media (max-width: 720px) { .nav-links a:not(.btn) { display: none; } }
 
   .btn {
@@ -170,7 +174,7 @@
   }
   .hero-visual img { width: 100%; height: 100%; object-fit: cover; }
   .hero-sticker {
-    position: absolute; bottom: -14px; left: -14px;
+    position: absolute; bottom: -26px; left: -32px;
     background: var(--mustard); color: var(--ink);
     font-family: 'DM Serif Display', serif;
     font-size: 18px; padding: 14px 18px;
@@ -731,8 +735,10 @@
 
   /* Split */
   .split { background: var(--cream-warm); padding: 100px 0; }
-  .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-  @media (max-width: 860px) { .split-grid { grid-template-columns: 1fr; } }
+  .split-grid { display: grid; grid-template-columns: 1fr; gap: 24px; max-width: 780px; margin: 0 auto; }
+  .split-grid .card.dark { padding: 28px; }
+  .split-grid .card.dark h3 { font-size: 24px; margin-bottom: 10px; }
+  .split-grid .card.dark p { margin-bottom: 18px; }
   .card {
     background: var(--cream);
     padding: 44px 36px;
@@ -873,9 +879,10 @@
     <a href="#top" class="nav-logo">Just Call <span>Jacko.</span></a>
     <div class="nav-links">
       <a href="#why">Why</a>
+      <a href="#services">How</a>
       <a href="#meet-polly">Meet Polly</a>
       <a href="#action">In Action</a>
-      <a href="#book" class="btn btn-primary" style="padding:10px 20px;font-size:14px;">Book Jacko →</a>
+      <a href="#book" class="btn btn-primary nav-cta" style="padding:10px 20px;font-size:14px;color:var(--cream);">Book Jacko →</a>
     </div>
   </div>
 </nav>
@@ -1218,11 +1225,19 @@
   </div>
 </section>
 
-<!-- Book / Donate -->
-<section class="split" id="book">
+<!-- Book / Donate (stacked: chip-in first, book form below) -->
+<section class="split">
   <div class="wrap">
     <div class="split-grid">
-      <div class="card">
+      <div class="card dark compact" id="donate">
+        <div class="tag">No list? Still want to chip in?</div>
+        <h3>Chuck into the GoFundMe.</h3>
+        <p>For mates who don't have a list but want to help anyway. Every dollar goes to keeping the Jackett family stable through Polly's most critical year of monitoring.</p>
+        <div class="cta-row">
+          <a href="https://www.gofundme.com/f/pfphe5-support-for-polly" target="_blank" rel="noopener" class="btn btn-mustard btn-lg">Open GoFundMe →</a>
+        </div>
+      </div>
+      <div class="card" id="book">
         <div class="tag">Got a list?</div>
         <h3>Book Jacko.</h3>
         <p>Fill this in and Jacko will be in touch to lock in a day. Around $500 as a donation for a full day's help — 100% to the family.</p>
@@ -1234,18 +1249,6 @@
             loading="lazy" title="Book Jacko — booking form">
             Loading…
           </iframe>
-        </div>
-      </div>
-      <div class="card dark" id="donate">
-        <div class="tag">No list? Still want to chip in?</div>
-        <h3>Chuck into the GoFundMe.</h3>
-        <p>For mates who don't have a list but want to help anyway. Every dollar goes to keeping the Jackett family stable through Polly's most critical year of monitoring.</p>
-        <div class="cta-row">
-          <a href="https://www.gofundme.com/f/pfphe5-support-for-polly" target="_blank" rel="noopener" class="btn btn-mustard btn-lg">Open GoFundMe →</a>
-        </div>
-        <div style="margin-top:22px; background: var(--cream); padding: 16px; border-radius: 12px;">
-          <div class="gfm-embed" data-url="https://www.gofundme.com/f/pfphe5-support-for-polly/widget/medium/"></div>
-          <script defer src="https://www.gofundme.com/static/js/embed.js"></script>
         </div>
       </div>
     </div>
