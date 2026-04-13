@@ -120,13 +120,13 @@
   }
   .hero h1 .just {
     display: block;
-    color: var(--ink);
-    font-size: .2em;
-    font-family: 'Inter', sans-serif;
-    font-weight: 800;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    margin-bottom: 14px;
+    color: var(--ink-soft);
+    font-size: .18em;
+    font-family: 'Caveat', cursive;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    margin: 14px 0 0;
   }
   .hero h1 .call { display: block; }
   .hero h1 .jacko {
@@ -242,13 +242,11 @@
   @media (max-width: 520px) {
     .hero { padding: 28px 0 40px; }
     .hero h1 { font-size: clamp(42px, 13vw, 64px); }
-    .hero h1 .just { font-size: .22em; }
+    .hero h1 .just { font-size: .28em; margin-top: 10px; }
     .hero-sub { font-size: 16px; margin-bottom: 20px; }
     .hero-catch { font-size: 20px; margin-bottom: 22px; }
-    .hero-eyebrow { margin-bottom: 16px; }
     .hero-ctas .btn { width: 100%; justify-content: center; }
     .hero-ctas { gap: 10px; margin-bottom: 22px; }
-    .hero-meta { gap: 10px 22px; font-size: 13px; padding-top: 16px; }
     .hero-video { max-width: 260px; border-radius: 18px; }
     .hero-play-ico { width: 64px; height: 64px; font-size: 22px; }
     .hero-play-label { font-size: 11px; padding: 6px 12px; }
@@ -300,6 +298,52 @@
   @media (max-width: 520px) {
     .jules-strip { padding: 34px 0; }
     .jules-quote { font-size: 30px; }
+  }
+
+  /* Meta strip — Melbourne · donation · who it's for · where it goes */
+  .meta-strip {
+    background: var(--green-deep);
+    color: var(--cream);
+    padding: 26px 0;
+    border-top: 3px solid var(--mustard);
+    border-bottom: 3px solid var(--mustard);
+  }
+  .meta-row {
+    display: flex; flex-wrap: wrap;
+    align-items: center; justify-content: center;
+    gap: 18px 32px;
+    text-align: center;
+  }
+  .meta-item {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    letter-spacing: .04em;
+    color: rgba(249,243,229,.92);
+    display: inline-flex; align-items: baseline; gap: 8px;
+  }
+  .meta-item b {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    font-size: 22px;
+    letter-spacing: 0;
+    color: var(--mustard);
+  }
+  .meta-item .meta-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--mustard); opacity: .65;
+    display: inline-block;
+  }
+  .meta-sep {
+    width: 1px; height: 22px;
+    background: rgba(249,243,229,.2);
+    display: inline-block;
+  }
+  @media (max-width: 720px) {
+    .meta-strip { padding: 20px 0; }
+    .meta-row { gap: 10px 20px; }
+    .meta-item { font-size: 13px; }
+    .meta-item b { font-size: 18px; }
+    .meta-sep { display: none; }
   }
 
   /* Meet Polly strip */
@@ -710,7 +754,26 @@
   .card.dark p { color: rgba(244,235,221,.85); }
   .card .cta-row { margin-top: auto; display: flex; gap: 12px; flex-wrap: wrap; }
 
-  /* Placeholder booking form */
+  /* Google Form embed */
+  .jcj-form-embed {
+    margin-top: 10px;
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1.5px solid rgba(34,56,42,.12);
+    box-shadow: 0 4px 14px rgba(34,56,42,.06);
+  }
+  .jcj-form-embed iframe {
+    display: block;
+    width: 100%;
+    min-height: 1600px;
+    border: 0;
+  }
+  @media (max-width: 520px) {
+    .jcj-form-embed iframe { min-height: 1750px; }
+  }
+
+  /* Placeholder booking form (legacy) */
   .jcj-form { margin-top: 10px; display: flex; flex-direction: column; gap: 14px; }
   .jcj-field { display: flex; flex-direction: column; gap: 6px; }
   .jcj-field label { font-size: 13px; font-weight: 600; color: var(--green-deep); letter-spacing: .02em; }
@@ -809,10 +872,10 @@
   <div class="nav-inner">
     <a href="#top" class="nav-logo">Just Call <span>Jacko.</span></a>
     <div class="nav-links">
-      <a href="#services">How he helps</a>
-      <a href="#action">In action</a>
-      <a href="#why">The why</a>
-      <a href="#book" class="btn btn-mustard" style="padding:10px 20px;font-size:14px;color:#22382A;">Get on the list →</a>
+      <a href="#why">Why</a>
+      <a href="#meet-polly">Meet Polly</a>
+      <a href="#action">In Action</a>
+      <a href="#book" class="btn btn-primary" style="padding:10px 20px;font-size:14px;">Book Jacko →</a>
     </div>
   </div>
 </nav>
@@ -821,28 +884,22 @@
 <header class="hero" id="top">
   <div class="wrap hero-grid">
     <div>
-      <span class="hero-eyebrow"><span class="dot"></span> Melbourne</span>
       <h1>
-        <span class="just">Your local handyman.</span>
         <span class="call">Just Call</span>
         <span class="jacko">Jacko.</span>
+        <span class="just">a local handyman.</span>
       </h1>
       <p class="hero-sub">
         <b>This is Jacko.</b> His daughter Polly is recovering from brain cancer, so he can't be back at work full-time.
-        His mates, wives and brothers have always said <i>"just call Jacko — he'll sort it."</i>
+        His mates have always said <i>"just call Jacko — he'll sort it."</i>
         So we put this together for him. You give him a list, he comes and helps, you chip in a donation for the family.
       </p>
       <p class="hero-catch">
         Help Polly by <span class="u">helping him help you.</span>
       </p>
       <div class="hero-ctas">
-        <a href="#book" class="btn btn-primary btn-lg">Get on Jacko's list →</a>
+        <a href="#book" class="btn btn-primary btn-lg">Book Jacko →</a>
         <a href="#how-he-helps" class="btn btn-secondary btn-lg">See what he can help with</a>
-      </div>
-      <div class="hero-meta">
-        <div><b>$500</b> · suggested donation, full day's help</div>
-        <div><b>Friends &amp; friends-of-friends</b></div>
-        <div><b>100%</b> goes to the family</div>
       </div>
     </div>
     <div>
@@ -860,6 +917,19 @@
     </div>
   </div>
 </header>
+
+<!-- Meta strip — the framing, in a green bar -->
+<section class="meta-strip" aria-label="How it works at a glance">
+  <div class="wrap meta-row">
+    <div class="meta-item"><span class="meta-dot"></span> Melbourne</div>
+    <div class="meta-sep"></div>
+    <div class="meta-item"><b>$500</b> suggested donation · full day's help</div>
+    <div class="meta-sep"></div>
+    <div class="meta-item">Friends &amp; friends-of-friends</div>
+    <div class="meta-sep"></div>
+    <div class="meta-item"><b>100%</b> goes to the family</div>
+  </div>
+</section>
 
 <!-- Why -->
 <section class="why" id="why">
@@ -887,16 +957,11 @@
           <b>around $500 for a full day's help</b> — but it's a donation, not an invoice.
           Every dollar goes straight to the Jacketts.
         </p>
-        <p>
-          <b>This isn't a business.</b> There's no markup, no insurance, no ABN gymnastics.
-          You provide the materials, Jacko brings the tools and the hands. His mates put this
-          little site together for him — he didn't ask.
-        </p>
         <p class="why-tag">
           No handout. Just <b>a mate, a ute, and a list</b> — sorted.
         </p>
         <div style="margin-top: 28px; display: flex; flex-wrap: wrap; gap: 14px;">
-          <a href="#book" class="btn btn-primary btn-lg">Get on the list →</a>
+          <a href="#book" class="btn btn-primary btn-lg">Book Jacko →</a>
           <a href="https://www.gofundme.com/f/pfphe5-support-for-polly" target="_blank" rel="noopener" class="btn btn-link">Read Polly's story on the GoFundMe →</a>
         </div>
       </div>
@@ -930,7 +995,7 @@
 </section>
 
 <!-- Meet Polly -->
-<section class="meet-polly">
+<section class="meet-polly" id="meet-polly">
   <div class="wrap">
     <div class="mp-grid">
       <div class="mp-photo">
@@ -1021,7 +1086,7 @@
         <div class="price">$500<small> · donation</small></div>
         <div class="pitch">Going rate for a full day's help. Goes straight to the family.</div>
       </div>
-      <a href="#book" class="btn btn-mustard btn-lg">Get on Jacko's list →</a>
+      <a href="#book" class="btn btn-mustard btn-lg">Book Jacko →</a>
     </div>
   </div>
 </section>
@@ -1077,7 +1142,7 @@
         <div class="pl-item pending" data-delay="7">
           <div class="pl-check">☐</div>
           <div class="pl-label">Your list</div>
-          <div class="pl-date"><a href="#book" style="color:var(--brick); font-weight:600;">Get on Jacko's list →</a></div>
+          <div class="pl-date"><a href="#book" style="color:var(--brick); font-weight:600;">Book Jacko →</a></div>
         </div>
       </div>
 
@@ -1131,7 +1196,7 @@
 <section class="how">
   <div class="wrap">
     <div class="section-label">How it works</div>
-    <h2 class="section-title">Get on the list. Get stuff done.</h2>
+    <h2 class="section-title">Book Jacko. Get stuff done.</h2>
     <p class="section-lead">No invoices, no quotes, no faff. You send through a list, Jacko shows up, the list gets shorter.</p>
     <div class="how-steps">
       <div class="step">
@@ -1159,44 +1224,17 @@
     <div class="split-grid">
       <div class="card">
         <div class="tag">Got a list?</div>
-        <h3>Get on Jacko's list.</h3>
+        <h3>Book Jacko.</h3>
         <p>Fill this in and Jacko will be in touch to lock in a day. Around $500 as a donation for a full day's help — 100% to the family.</p>
 
-        <form class="jcj-form" id="bookingForm" novalidate>
-          <div class="jcj-row">
-            <div class="jcj-field">
-              <label for="jcj-name">Your name</label>
-              <input type="text" id="jcj-name" name="name" placeholder="First name works" autocomplete="given-name" required />
-            </div>
-            <div class="jcj-field">
-              <label for="jcj-contact">Phone or email</label>
-              <input type="text" id="jcj-contact" name="contact" placeholder="How should Jacko reach you?" required />
-            </div>
-          </div>
-          <div class="jcj-row">
-            <div class="jcj-field">
-              <label for="jcj-suburb">Suburb</label>
-              <input type="text" id="jcj-suburb" name="suburb" placeholder="e.g. Brighton, Heidelberg" required />
-            </div>
-            <div class="jcj-field">
-              <label for="jcj-when">Rough timing</label>
-              <select id="jcj-when" name="when">
-                <option>This week if you can</option>
-                <option>Next week</option>
-                <option>This month</option>
-                <option>Whenever suits</option>
-              </select>
-            </div>
-          </div>
-          <div class="jcj-field">
-            <label for="jcj-list">The list — what needs doing?</label>
-            <textarea id="jcj-list" name="list" placeholder="Flat-pack in the hallway, two shelves to hang, bit of a tip run… don't overthink it."></textarea>
-          </div>
-          <div class="jcj-note">
-            <b>Heads up:</b> this is a placeholder form while the proper booking form gets set up. Hit submit anyway — your details will be captured once the form's live. Or DM Jacko on Instagram in the meantime.
-          </div>
-          <button type="submit" class="btn btn-primary btn-lg jcj-submit">Send to Jacko →</button>
-        </form>
+        <div class="jcj-form-embed">
+          <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLSfAfVfD0Hkb_uI706WJ6yitkgIXXKfCOmcdP6lRw1Dlu5tLEQ/viewform?embedded=true"
+            width="100%" height="1600" frameborder="0" marginheight="0" marginwidth="0"
+            loading="lazy" title="Book Jacko — booking form">
+            Loading…
+          </iframe>
+        </div>
       </div>
       <div class="card dark" id="donate">
         <div class="tag">No list? Still want to chip in?</div>
@@ -1228,7 +1266,7 @@
         <ul>
           <li><a href="#services">How he helps</a></li>
           <li><a href="#action">In action</a></li>
-          <li><a href="#book">Get on the list</a></li>
+          <li><a href="#book">Book Jacko</a></li>
           <li><a href="#donate">Donate instead</a></li>
         </ul>
       </div>
