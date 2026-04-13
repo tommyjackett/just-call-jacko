@@ -171,8 +171,63 @@
     font-size: 18px; padding: 14px 18px;
     border-radius: 14px; box-shadow: var(--shadow-sm);
     transform: rotate(-4deg);
+    z-index: 3;
   }
   .hero-sticker b { display: block; font-size: 26px; line-height: 1; }
+
+  .hero-catch {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(22px, 2.4vw, 28px);
+    line-height: 1.2; color: var(--green-deep);
+    margin: 0 0 28px; max-width: 540px;
+  }
+  .hero-catch .u {
+    background: linear-gradient(180deg, transparent 62%, rgba(214,155,58,.55) 62%);
+    padding: 0 2px; color: var(--brick);
+  }
+
+  .hero-video {
+    position: relative;
+    aspect-ratio: 9/16;
+    max-width: 380px; margin: 0 auto;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--ink);
+    box-shadow: var(--shadow);
+    transform: rotate(1.5deg);
+    cursor: pointer;
+    transition: transform .25s ease;
+  }
+  .hero-video:hover { transform: rotate(1.5deg) translateY(-3px); }
+  .hero-video img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-play {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 14px;
+    background: linear-gradient(180deg, rgba(0,0,0,.1) 0%, rgba(0,0,0,.55) 100%);
+    transition: background .25s ease;
+    z-index: 2;
+  }
+  .hero-video:hover .hero-play { background: linear-gradient(180deg, rgba(0,0,0,.2) 0%, rgba(0,0,0,.7) 100%); }
+  .hero-play-ico {
+    width: 78px; height: 78px; border-radius: 50%;
+    background: var(--mustard); color: var(--ink);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 26px; padding-left: 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.4);
+  }
+  .hero-video:hover .hero-play-ico { transform: scale(1.05); }
+  .hero-play-label {
+    color: var(--cream); font-weight: 600; font-size: 13px; letter-spacing: .06em;
+    background: rgba(0,0,0,.45); backdrop-filter: blur(6px);
+    padding: 7px 14px; border-radius: 999px;
+    text-transform: uppercase;
+  }
+  .hero-video.playing { cursor: default; transform: none; }
+  .hero-video.playing:hover { transform: none; }
+  .hero-video.playing .hero-play,
+  .hero-video.playing .hero-sticker { display: none; }
+  .hero-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
   /* Meet Polly strip */
   .meet-polly {
@@ -203,6 +258,17 @@
   }
   .mp-quote b { color: var(--brick); }
   .mp-attrib { font-size: 14px; color: var(--ink-soft); margin-bottom: 24px; }
+  .mp-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 3.2vw, 40px);
+    line-height: 1.1; color: var(--green-deep);
+    margin: 0 0 18px; letter-spacing: -0.01em;
+  }
+  .mp-story {
+    font-size: 17px; line-height: 1.55; color: var(--ink-soft);
+    margin: 0 0 14px; max-width: 560px;
+  }
+  .mp-story b { color: var(--ink); }
   .mp-ctas { display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: center; }
   .play-ico {
     display: inline-flex; align-items: center; justify-content: center;
@@ -268,27 +334,34 @@
   .polly-carousel { position: relative; }
   .pc-track {
     display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
-    gap: 16px; padding: 6px 2px 22px; scroll-behavior: smooth;
+    gap: 18px; padding: 6px 2px 22px; scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
   }
   .pc-track::-webkit-scrollbar { height: 6px; }
   .pc-track::-webkit-scrollbar-thumb { background: rgba(34,56,42,.25); border-radius: 3px; }
   .pc-slide {
-    flex: 0 0 auto; width: min(400px, 88%);
+    flex: 0 0 100%;
     scroll-snap-align: center;
-    border-radius: var(--radius); overflow: hidden;
+    border-radius: var(--radius-lg); overflow: hidden;
     box-shadow: var(--shadow); background: var(--ink);
+    aspect-ratio: 4/5;
   }
-  .pc-slide img { width: 100%; height: auto; display: block; }
+  .pc-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .pc-dots {
-    display: flex; justify-content: center; gap: 8px; margin-top: 8px;
+    display: flex; justify-content: center; gap: 10px; margin-top: 6px;
   }
   .pc-dot {
-    width: 8px; height: 8px; border-radius: 50%;
+    width: 10px; height: 10px; border-radius: 50%;
     background: rgba(34,56,42,.2); border: 0; cursor: pointer;
     transition: background .2s ease, transform .2s ease;
   }
-  .pc-dot.active { background: var(--green-deep); transform: scale(1.3); }
+  .pc-dot.active { background: var(--green-deep); transform: scale(1.35); }
+  .pc-caption {
+    text-align: center; margin-top: 12px;
+    font-family: 'Caveat', cursive; color: var(--green);
+    font-size: 20px;
+  }
 
   /* Video lightbox */
   .lightbox {
@@ -373,60 +446,123 @@
   .action { background: var(--cream); }
   .action-head { text-align: center; margin-bottom: 40px; }
   .action-head .section-lead { margin-left: auto; margin-right: auto; }
-  .action-grid {
+
+  .action-layout {
     display: grid;
-    grid-template-columns: 1.2fr .9fr .9fr;
-    grid-template-rows: 220px 220px;
-    gap: 14px;
+    grid-template-columns: .95fr 1.05fr;
+    gap: 46px; align-items: start;
   }
-  @media (max-width: 800px) {
-    .action-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 180px); }
-    .action-grid .a1 { grid-column: 1 / span 2; grid-row: 1; }
+  @media (max-width: 860px) { .action-layout { grid-template-columns: 1fr; gap: 34px; } }
+
+  /* Jobs list — reuses .pl-item styles */
+  .jobs-list {
+    background: var(--cream-warm);
+    border: 2px dashed rgba(34,56,42,.22);
+    padding: 30px 32px; border-radius: var(--radius);
+    position: relative;
   }
-  .action-cell { border-radius: var(--radius); overflow: hidden; background: var(--sand); position: relative; }
-  .action-cell img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
-  .action-cell:hover img { transform: scale(1.05); }
-  .a1 { grid-row: 1 / span 2; }
+  .jobs-list::before {
+    content: ''; position: absolute;
+    top: -14px; left: 32px;
+    width: 72px; height: 22px;
+    background: var(--mustard); opacity: .9;
+    border-radius: 3px; transform: rotate(-3deg);
+    box-shadow: 0 2px 4px rgba(0,0,0,.08);
+  }
+  .jobs-list h4 {
+    font-family: 'Caveat', cursive; color: var(--green-deep);
+    font-size: 38px; margin: 0 0 2px; line-height: 1;
+  }
+  .jobs-list .sub { font-size: 13px; color: var(--ink-soft); margin-bottom: 18px; letter-spacing: .02em; }
+
+  /* Photo stack — collage */
+  .action-photos {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    grid-template-rows: 200px 200px;
+    gap: 12px;
+  }
+  @media (max-width: 500px) { .action-photos { grid-template-rows: 160px 160px; } }
+  .action-photo { position: relative; border-radius: var(--radius); overflow: hidden; background: var(--sand); box-shadow: var(--shadow-sm); }
+  .action-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+  .action-photo:hover img { transform: scale(1.04); }
+  .ap-1 { grid-row: 1 / span 2; }
   .action-caption {
-    position: absolute; left: 14px; bottom: 14px;
+    position: absolute; left: 12px; bottom: 12px;
     background: rgba(34,56,42,.92); color: var(--cream);
     font-size: 12px; font-weight: 600; letter-spacing: .03em;
-    padding: 7px 12px; border-radius: 999px;
-  }
-  .action-cta {
-    background: var(--green-deep) !important;
-    color: var(--cream); padding: 22px;
-    display: flex; flex-direction: column; justify-content: center;
+    padding: 6px 11px; border-radius: 999px;
   }
 
-  /* Reviews */
-  .reviews { background: var(--green-deep); color: var(--cream); }
-  .reviews .section-label { color: var(--mustard); }
-  .reviews .section-title { color: var(--cream); }
-  .reviews-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center; }
-  @media (max-width: 860px) { .reviews-grid { grid-template-columns: 1fr; } }
-  .review-quote-lg {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(28px, 3.5vw, 44px);
-    line-height: 1.15;
-    color: var(--cream);
-    margin: 0 0 22px;
+  /* Reviews — handwritten notepad */
+  .reviews { background: var(--cream-warm); }
+  .reviews-head { text-align: center; margin-bottom: 40px; }
+  .review-kicker {
+    font-family: 'Caveat', cursive;
+    color: var(--brick); font-size: 30px;
+    transform: rotate(-2deg); display: inline-block;
+    margin-bottom: 6px;
   }
-  .review-quote-lg .mark { color: var(--mustard); }
-  .review-meta { font-size: 15px; opacity: .75; }
-  .review-meta b { color: var(--mustard); }
-  .review-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    margin-top: 20px;
-    background: rgba(214,155,58,.2); color: var(--mustard);
-    padding: 8px 14px; border-radius: 999px; font-weight: 600; font-size: 14px;
+  .reviews-stage {
+    max-width: 720px; margin: 0 auto;
+    position: relative;
   }
-  .review-card {
-    background: var(--cream); border-radius: var(--radius);
-    padding: 10px; box-shadow: var(--shadow);
-    transform: rotate(-1.5deg);
+  .review-notes { position: relative; min-height: 280px; }
+  .review-note {
+    background: #fffdf7;
+    border-radius: 8px;
+    padding: 40px 44px 38px;
+    box-shadow: 0 18px 44px -18px rgba(28,26,23,.35), 0 2px 6px rgba(28,26,23,.06);
+    position: relative;
+    background-image:
+      repeating-linear-gradient(180deg, transparent 0 31px, rgba(34,56,42,.08) 31px 32px);
+    background-position: 0 60px;
+    transform: rotate(-.6deg);
+    opacity: 0; transition: opacity .35s ease, transform .35s ease;
+    display: none;
   }
-  .review-card img { border-radius: 12px; }
+  .review-note::before {
+    content: '';
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%) rotate(-3deg);
+    width: 120px; height: 24px;
+    background: var(--mustard); opacity: .9;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0,0,0,.1);
+  }
+  .review-note.active { display: block; opacity: 1; }
+  @media (max-width: 520px) { .review-note { padding: 36px 26px 30px; } }
+
+  .rn-stars {
+    font-family: 'Inter', sans-serif; color: var(--mustard);
+    font-size: 20px; letter-spacing: .1em; margin-bottom: 14px;
+  }
+  .rn-quote {
+    font-family: 'Caveat', cursive;
+    color: var(--green-deep);
+    font-size: clamp(24px, 3vw, 32px);
+    line-height: 1.35; margin: 0 0 22px;
+  }
+  .rn-quote b { color: var(--brick); }
+  .rn-attrib {
+    font-family: 'Caveat', cursive;
+    color: var(--ink-soft); font-size: 22px; font-weight: 600;
+  }
+  .rn-date {
+    position: absolute; bottom: 20px; right: 28px;
+    font-family: 'Caveat', cursive;
+    color: var(--ink-soft); font-size: 18px; opacity: .7;
+    transform: rotate(-3deg);
+  }
+  .review-dots {
+    display: flex; justify-content: center; gap: 10px; margin-top: 28px;
+  }
+  .review-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: rgba(34,56,42,.2); border: 0; cursor: pointer;
+    transition: background .2s ease, transform .2s ease;
+  }
+  .review-dot.active { background: var(--green-deep); transform: scale(1.35); }
+  .review-dots:empty { display: none; }
 
   /* How */
   .how { background: var(--cream-warm); }
@@ -449,8 +585,15 @@
     margin-bottom: 6px;
   }
   .why h2 { font-family: 'DM Serif Display', serif; font-size: clamp(32px, 4.5vw, 48px); color: var(--green-deep); margin: 0 0 22px; line-height: 1.05; }
-  .why p { font-size: 17px; color: var(--ink-soft); margin: 0 0 14px; }
+  .why p { font-size: 17px; color: var(--ink-soft); margin: 0 0 16px; line-height: 1.6; }
   .why p b { color: var(--ink); }
+  .why .why-tag {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(22px, 2.4vw, 28px);
+    color: var(--green-deep);
+    margin-top: 22px; line-height: 1.3;
+  }
+  .why .why-tag b { color: var(--brick); }
   .why-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 26px 0 10px; }
   .stat {
     background: var(--cream-warm); padding: 20px; border-radius: var(--radius);
@@ -593,7 +736,7 @@
   <div class="nav-inner">
     <a href="#top" class="nav-logo">Just Call <span>Jacko.</span></a>
     <div class="nav-links">
-      <a href="#services">What he does</a>
+      <a href="#services">How he helps</a>
       <a href="#action">In action</a>
       <a href="#why">The why</a>
       <a href="#book" class="btn btn-mustard" style="padding:10px 20px;font-size:14px;color:#22382A;">Book Jacko →</a>
@@ -614,11 +757,13 @@
       <p class="hero-sub">
         <b>This is Jacko.</b> His four-year-old daughter Polly is recovering from brain cancer,
         so he can't go back to full-time work. Rather than ask for a handout — he's offering his services.
-        <b>Don't pay a stranger.</b>
+      </p>
+      <p class="hero-catch">
+        Help Polly by <span class="u">helping him help you.</span>
       </p>
       <div class="hero-ctas">
         <a href="#book" class="btn btn-primary btn-lg">Book Jacko →</a>
-        <a href="#why" class="btn btn-secondary btn-lg">The story behind it</a>
+        <a href="#how-he-helps" class="btn btn-secondary btn-lg">See what he can do</a>
       </div>
       <div class="hero-meta">
         <div><b>$500</b> flat · full day's work</div>
@@ -627,8 +772,12 @@
       </div>
     </div>
     <div>
-      <div class="hero-visual">
-        <img src="assets/jacko-in-action-1.jpg" alt="Jacko installing privacy screens in a Melbourne backyard" />
+      <div class="hero-video" id="heroVideo" role="button" tabindex="0" aria-label="Play the Just Call Jacko story">
+        <img src="https://img.youtube.com/vi/rFx6ukWWRns/maxresdefault.jpg" alt="Tap to play the Just Call Jacko story" loading="eager" />
+        <div class="hero-play">
+          <span class="hero-play-ico" aria-hidden="true">▶</span>
+          <div class="hero-play-label">Press play · the story</div>
+        </div>
         <div class="hero-sticker">
           Handiest man<br/>
           <b>I know.</b>
@@ -648,16 +797,18 @@
       </div>
       <div class="mp-copy">
         <div class="mp-kicker">Meet Polly —</div>
-        <p class="mp-quote">
-          "Hi Jacko. <b>Bloody good handyman.</b> But an even better dad.
-          And you get to help Polly by <b>helping him help you.</b>"
+        <h2 class="mp-title">Four years old. Toughest year of her life.</h2>
+        <p class="mp-story">
+          In February 2025, Polly was diagnosed with a brain tumour. The next day — a <b>14-hour surgery</b>.
+          Then six months of chemo at the Royal Children's, twelve weeks in the US for proton radiation,
+          and a bell-ringing flight home in January.
         </p>
-        <div class="mp-attrib">— Jules Lund, the mate who started all this</div>
+        <p class="mp-story">
+          She's now <b>in remission</b>, re-learning how to walk and talk — with five years of monitoring
+          ahead and both parents out of full-time work to carry her through it.
+        </p>
         <div class="mp-ctas">
-          <button type="button" class="btn btn-secondary btn-lg" id="openVideo">
-            <span class="play-ico" aria-hidden="true">▶</span> Watch Polly's story · 60s
-          </button>
-          <a href="#why" class="btn btn-link">or read how we got here →</a>
+          <a href="https://www.gofundme.com/f/pfphe5-support-for-polly" target="_blank" rel="noopener" class="btn btn-link">Read her full story on the GoFundMe →</a>
         </div>
       </div>
     </div>
@@ -666,10 +817,10 @@
 
 <!-- Services -->
 <section class="services" id="services">
-  <div class="wrap">
+  <div class="wrap" id="how-he-helps">
     <div class="services-head">
       <div>
-        <div class="section-label">What he does</div>
+        <div class="section-label">How he can help you</div>
         <h2 class="section-title">Stuff you've been meaning to get done.</h2>
         <p class="section-lead" style="margin-bottom:0;">Jacko's not a tradie. He's a mate with tools, a ute, and a knack for getting things done before lunch. Here's what he's up for:</p>
       </div>
@@ -736,27 +887,58 @@
     <p class="section-lead">A few of the jobs Jacko's knocked over around Melbourne since this kicked off.</p>
   </div>
   <div class="wrap">
-    <div class="action-grid">
-      <div class="action-cell a1">
-        <img src="assets/jacko-in-action-1.jpg" alt="Jacko installing privacy screens" loading="lazy" />
-        <div class="action-caption">Privacy screens · installed</div>
+    <div class="action-layout">
+      <!-- Jobs checklist (left) -->
+      <div class="jobs-list" id="jobsList" data-observed="0">
+        <h4>Jobs done.</h4>
+        <div class="sub">Ticked off around Melbourne since he kicked off.</div>
+        <div class="pl-item done" data-delay="0">
+          <div class="pl-check">✓</div>
+          <div class="pl-label">Privacy screens · installed</div>
+          <div class="pl-date">Imogen, Brunswick</div>
+        </div>
+        <div class="pl-item done" data-delay="1">
+          <div class="pl-check">✓</div>
+          <div class="pl-label">Shelving &amp; picture hanging</div>
+          <div class="pl-date">Imogen</div>
+        </div>
+        <div class="pl-item done" data-delay="2">
+          <div class="pl-check">✓</div>
+          <div class="pl-label">Yard tidy-up &amp; green-waste run</div>
+          <div class="pl-date">Imogen</div>
+        </div>
+        <div class="pl-item done" data-delay="3">
+          <div class="pl-check">✓</div>
+          <div class="pl-label">Outdoor patch &amp; paint</div>
+          <div class="pl-date">Imogen</div>
+        </div>
+        <div class="pl-item done" data-delay="4">
+          <div class="pl-check">✓</div>
+          <div class="pl-label">Flat-pack — the lot</div>
+          <div class="pl-date">Imogen</div>
+        </div>
+        <div class="pl-item pending" data-delay="5">
+          <div class="pl-check">☐</div>
+          <div class="pl-label">Your list</div>
+          <div class="pl-date"><a href="#book" style="color:var(--brick); font-weight:600;">Book a day →</a></div>
+        </div>
       </div>
-      <div class="action-cell">
-        <img src="assets/jacko-in-action-2.jpg" alt="Jacko on site" loading="lazy" />
-        <div class="action-caption">On the tools</div>
-      </div>
-      <div class="action-cell">
-        <img src="assets/jacko-in-action-3.jpg" alt="Jacko on site" loading="lazy" />
-        <div class="action-caption">Outdoor fix-up</div>
-      </div>
-      <div class="action-cell">
-        <img src="assets/jacko-in-action-4.jpg" alt="Jacko on site" loading="lazy" />
-        <div class="action-caption">Another one done</div>
-      </div>
-      <div class="action-cell action-cta">
-        <div class="scribble" style="font-size:26px; color: var(--mustard); line-height:1;">next up?</div>
-        <div style="font-family:'DM Serif Display',serif; font-size:24px; line-height:1.1; margin-top:8px;">Your list.</div>
-        <a href="#book" style="color:var(--mustard); font-weight:600; margin-top:14px; font-size:14px;">Book a day →</a>
+
+      <!-- Photo stack (right) -->
+      <div class="action-photos">
+        <div class="action-photo ap-1">
+          <img src="assets/jacko-in-action-1.jpg" alt="Jacko installing privacy screens" loading="lazy" />
+          <div class="action-caption">Privacy screens</div>
+        </div>
+        <div class="action-photo ap-2">
+          <img src="assets/jacko-in-action-2.jpg" alt="Jacko on the tools" loading="lazy" />
+        </div>
+        <div class="action-photo ap-3">
+          <img src="assets/jacko-in-action-3.jpg" alt="Outdoor fix-up" loading="lazy" />
+        </div>
+        <div class="action-photo ap-4">
+          <img src="assets/jacko-in-action-4.jpg" alt="Another one done" loading="lazy" />
+        </div>
       </div>
     </div>
   </div>
@@ -765,19 +947,28 @@
 <!-- Reviews -->
 <section class="reviews">
   <div class="wrap">
-    <div class="section-label">Reviews</div>
-    <h2 class="section-title">The early feedback.</h2>
-    <div class="reviews-grid">
-      <div>
-        <p class="review-quote-lg">
-          <span class="mark">"</span>Jacko came and got stuck into a huge list — privacy screens, shelving, the lot. <b>10/10 service.</b> Would 100% book him again.<span class="mark">"</span>
-        </p>
-        <div class="review-meta">— Imogen · <b>Melbourne</b> · first customer</div>
-        <div class="review-badge">★★★★★ Actual customer · April 2026</div>
+    <div class="reviews-head">
+      <div class="review-kicker">Word on the street —</div>
+      <h2 class="section-title">What people are saying.</h2>
+    </div>
+
+    <div class="reviews-stage">
+      <div class="review-notes" id="reviewNotes">
+        <!-- Review note 1 -->
+        <article class="review-note active" data-i="0">
+          <div class="rn-stars">★ ★ ★ ★ ★</div>
+          <p class="rn-quote">
+            Jacko came and got stuck into a huge list — privacy screens, shelving, the lot.
+            <b>10/10 service.</b> Would 100% book him again.
+          </p>
+          <div class="rn-attrib">— Imogen · Brunswick · first customer</div>
+          <div class="rn-date">April 2026</div>
+        </article>
+
+        <!-- Future reviews cycle in here. Duplicate the article above, bump data-i. -->
       </div>
-      <div class="review-card">
-        <img src="assets/review-imogen.png" alt="Imogen's review of Jacko's work" />
-      </div>
+
+      <div class="review-dots" id="reviewDots" aria-label="Review pagination"></div>
     </div>
   </div>
 </section>
@@ -814,62 +1005,27 @@
     <div class="why-grid">
       <div>
         <div class="why-kicker">the why —</div>
-        <h2>Polly's list.</h2>
-        <p style="font-size:17px; color:var(--ink-soft); margin:0 0 22px;">
-          In the last 12 months, Polly's ticked off more than most of us will in a lifetime.
-          Here's the year that changed everything — and what's still on the list.
+        <h2>Why we're doing this.</h2>
+        <p>
+          Mikey — Jacko to everyone who knows him — is one of three brothers. For the last twelve months
+          he's been in survival mode. Surgery, chemo, three months in the US for proton radiation, and
+          a bell-ringing flight home with Polly in remission.
         </p>
-
-        <div class="pollys-list" id="pollysList" data-observed="0">
-          <h4>Polly's to-do list</h4>
-          <div class="sub">The tickboxes of a 4-year-old warrior.</div>
-          <div class="pl-item done" data-delay="0">
-            <div class="pl-check">✓</div>
-            <div class="pl-label">14-hour brain surgery</div>
-            <div class="pl-date">Feb '25</div>
-          </div>
-          <div class="pl-item done" data-delay="1">
-            <div class="pl-check">✓</div>
-            <div class="pl-label">Learn to crawl. Then walk. Again.</div>
-            <div class="pl-date">'25</div>
-          </div>
-          <div class="pl-item done" data-delay="2">
-            <div class="pl-check">✓</div>
-            <div class="pl-label">6 months of chemo at the RCH</div>
-            <div class="pl-date">'25</div>
-          </div>
-          <div class="pl-item done" data-delay="3">
-            <div class="pl-check">✓</div>
-            <div class="pl-label">12 weeks of proton radiation in the US</div>
-            <div class="pl-date">Oct–Dec '25</div>
-          </div>
-          <div class="pl-item done" data-delay="4">
-            <div class="pl-check">✓</div>
-            <div class="pl-label">Ring the bell. Fly home.</div>
-            <div class="pl-date">Jan '26</div>
-          </div>
-          <div class="pl-item done" data-delay="5">
-            <div class="pl-check">✓</div>
-            <div class="pl-label">First post-treatment scan: <b>all clear</b></div>
-            <div class="pl-date">Feb '26</div>
-          </div>
-          <div class="pl-item pending" data-delay="6">
-            <div class="pl-check">☐</div>
-            <div class="pl-label">5 years of monitoring. MRI every 3 months.</div>
-            <div class="pl-date">In progress</div>
-          </div>
-          <div class="pl-item pending" data-delay="7">
-            <div class="pl-check">☐</div>
-            <div class="pl-label">Keep mum and dad at home for her</div>
-            <div class="pl-date">That's us.</div>
-          </div>
-        </div>
-
-        <div class="why-stats" style="margin-top:30px;">
-          <div class="stat"><b>5 yrs</b><span>of monitoring ahead</span></div>
-          <div class="stat"><b>$10k/mo</b><span>family baseline cost</span></div>
-          <div class="stat"><b>3</b><span>kids at home</span></div>
-          <div class="stat"><b>2026</b><span>the year that matters</span></div>
+        <p>
+          Both Mike and Amy have stepped out of full-time work to carry Polly through her recovery and
+          the five years of monitoring that come with it. That's the reality — and it's not going away
+          quickly.
+        </p>
+        <p>
+          Rather than hand out a GoFundMe link, Mikey's doing what he's always done — <b>picking up his
+          tools</b>. Book him for a day. $500, flat. The money goes straight to his family. That's it.
+        </p>
+        <p class="why-tag">
+          No handout. Just <b>a mate, a ute, and a list</b> — sorted.
+        </p>
+        <div style="margin-top: 28px; display: flex; flex-wrap: wrap; gap: 14px;">
+          <a href="#book" class="btn btn-primary btn-lg">Book Jacko →</a>
+          <a href="https://www.gofundme.com/f/pfphe5-support-for-polly" target="_blank" rel="noopener" class="btn btn-link">Read Polly's story on the GoFundMe →</a>
         </div>
       </div>
 
@@ -882,25 +1038,12 @@
             <div class="pc-slide"><img src="assets/polly-family.jpg" alt="The Jackett family — ice cream day during the US treatment trip" loading="lazy" /></div>
           </div>
           <div class="pc-dots" id="pcDots"></div>
+          <div class="pc-caption">Polly's journey · swipe to keep going →</div>
         </div>
-        <button type="button" class="btn btn-primary btn-lg" id="openVideo2" style="margin-top: 22px; width: 100%; justify-content:center;">
-          <span class="play-ico" aria-hidden="true">▶</span> Watch the full story · 60s
-        </button>
-        <p style="font-size:13px; color: var(--ink-soft); margin-top:10px; text-align:center;">
-          Prefer to read it? <a href="https://www.gofundme.com/f/pfphe5-support-for-polly" target="_blank" rel="noopener">Full story on the GoFundMe →</a>
-        </p>
       </div>
     </div>
   </div>
 </section>
-
-<!-- Video lightbox -->
-<div class="lightbox" id="videoLightbox" role="dialog" aria-label="Polly's story video">
-  <div class="lightbox-inner">
-    <button type="button" class="lb-close" id="closeVideo" aria-label="Close video">✕</button>
-    <iframe id="videoFrame" src="" title="Polly's story" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-  </div>
-</div>
 
 <!-- Book / Donate -->
 <section class="split" id="book">
@@ -1033,46 +1176,70 @@
     });
   }
 
-  // Video lightbox
-  const VIDEO_SRC = 'https://www.youtube.com/embed/rFx6ukWWRns?autoplay=1&rel=0';
-  const lb = document.getElementById('videoLightbox');
-  const vf = document.getElementById('videoFrame');
-  function openVideo() {
-    if (!lb || !vf) return;
-    vf.src = VIDEO_SRC;
-    lb.classList.add('open');
-    document.body.style.overflow = 'hidden';
+  // Hero video — click-to-play (replaces thumbnail with live iframe)
+  const heroVid = document.getElementById('heroVideo');
+  if (heroVid) {
+    const play = () => {
+      if (heroVid.classList.contains('playing')) return;
+      heroVid.classList.add('playing');
+      const iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube.com/embed/rFx6ukWWRns?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+      iframe.title = 'The Just Call Jacko story';
+      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+      iframe.setAttribute('allowfullscreen', '');
+      heroVid.appendChild(iframe);
+    };
+    heroVid.addEventListener('click', play);
+    heroVid.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); play(); }
+    });
   }
-  function closeVideo() {
-    if (!lb || !vf) return;
-    vf.src = '';
-    lb.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-  document.getElementById('openVideo')?.addEventListener('click', openVideo);
-  document.getElementById('openVideo2')?.addEventListener('click', openVideo);
-  document.getElementById('closeVideo')?.addEventListener('click', closeVideo);
-  lb?.addEventListener('click', (e) => { if (e.target === lb) closeVideo(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeVideo(); });
 
-  // Polly's list — animate ticks on scroll
-  const list = document.getElementById('pollysList');
-  if (list && 'IntersectionObserver' in window) {
-    const items = list.querySelectorAll('.pl-item');
+  // Jobs list — animate ticks on scroll (In Action section)
+  const jobs = document.getElementById('jobsList');
+  if (jobs && 'IntersectionObserver' in window) {
+    const items = jobs.querySelectorAll('.pl-item');
     const obs = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting && list.dataset.observed === '0') {
-          list.dataset.observed = '1';
+        if (entry.isIntersecting && jobs.dataset.observed === '0') {
+          jobs.dataset.observed = '1';
           items.forEach((el, i) => {
-            setTimeout(() => el.classList.add('revealed'), i * 260);
+            setTimeout(() => el.classList.add('revealed'), i * 220);
           });
           obs.disconnect();
         }
       });
     }, { threshold: 0.25 });
-    obs.observe(list);
-  } else if (list) {
-    list.querySelectorAll('.pl-item').forEach(el => el.classList.add('revealed'));
+    obs.observe(jobs);
+  } else if (jobs) {
+    jobs.querySelectorAll('.pl-item').forEach(el => el.classList.add('revealed'));
+  }
+
+  // Reviews carousel — cycle through review notes (if multiple)
+  const reviewNotes = document.querySelectorAll('#reviewNotes .review-note');
+  const reviewDots = document.getElementById('reviewDots');
+  if (reviewNotes.length > 1 && reviewDots) {
+    let rIdx = 0, rTimer = null;
+    reviewNotes.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.type = 'button';
+      d.className = 'review-dot' + (i === 0 ? ' active' : '');
+      d.setAttribute('aria-label', 'Review ' + (i + 1));
+      d.addEventListener('click', () => show(i));
+      reviewDots.appendChild(d);
+    });
+    const dotEls = reviewDots.querySelectorAll('.review-dot');
+    function show(i) {
+      reviewNotes.forEach((n, j) => n.classList.toggle('active', j === i));
+      dotEls.forEach((d, j) => d.classList.toggle('active', j === i));
+      rIdx = i;
+      resetTimer();
+    }
+    function resetTimer() {
+      clearInterval(rTimer);
+      rTimer = setInterval(() => show((rIdx + 1) % reviewNotes.length), 6000);
+    }
+    resetTimer();
   }
 
   // Polly carousel — dot navigation
