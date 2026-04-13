@@ -352,8 +352,41 @@
   .card.dark p { color: rgba(244,235,221,.85); }
   .card .cta-row { margin-top: auto; display: flex; gap: 12px; flex-wrap: wrap; }
 
-  .form-embed { margin-top: 18px; border-radius: var(--radius); overflow: hidden; background: var(--cream); }
-  .form-embed iframe { width: 100%; min-height: 640px; border: 0; display: block; }
+  /* Placeholder booking form */
+  .jcj-form { margin-top: 10px; display: flex; flex-direction: column; gap: 14px; }
+  .jcj-field { display: flex; flex-direction: column; gap: 6px; }
+  .jcj-field label { font-size: 13px; font-weight: 600; color: var(--green-deep); letter-spacing: .02em; }
+  .jcj-field input, .jcj-field textarea, .jcj-field select {
+    font-family: inherit; font-size: 15px; color: var(--ink);
+    background: #fff; border: 1.5px solid rgba(34,56,42,.18);
+    border-radius: 12px; padding: 13px 14px;
+    transition: border-color .15s ease, box-shadow .15s ease;
+    width: 100%;
+  }
+  .jcj-field textarea { min-height: 96px; resize: vertical; }
+  .jcj-field input:focus, .jcj-field textarea:focus, .jcj-field select:focus {
+    outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(62,97,68,.15);
+  }
+  .jcj-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 520px) { .jcj-row { grid-template-columns: 1fr; } }
+  .jcj-submit { align-self: flex-start; margin-top: 4px; }
+  .jcj-note {
+    font-size: 12px; color: var(--ink-soft);
+    background: rgba(214,155,58,.14);
+    border-left: 3px solid var(--mustard);
+    padding: 10px 12px; border-radius: 8px;
+  }
+  .jcj-toast {
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: var(--green-deep); color: var(--cream);
+    padding: 14px 22px; border-radius: 999px;
+    font-size: 14px; font-weight: 600;
+    box-shadow: var(--shadow);
+    opacity: 0; pointer-events: none;
+    transition: transform .3s ease, opacity .3s ease;
+    z-index: 60;
+  }
+  .jcj-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
   /* Footer */
   footer { background: var(--green-deep); color: var(--cream); padding: 60px 0 40px; }
@@ -649,16 +682,42 @@
         <div class="tag">Got a list?</div>
         <h3>Book Jacko for a day.</h3>
         <p>Fill this in and Jacko will be in touch to lock in a day. $500 flat. One day, one list, one good bloke.</p>
-        <div class="form-embed">
-          <iframe
-            src="about:blank"
-            id="bookingForm"
-            title="Book Jacko — Expression of Interest"
-            loading="lazy"></iframe>
-        </div>
-        <p style="font-size:13px; color:var(--ink-soft); margin-top:16px;">
-          Form not loading? <a href="#" id="formFallback">Open it in a new tab →</a>
-        </p>
+
+        <form class="jcj-form" id="bookingForm" novalidate>
+          <div class="jcj-row">
+            <div class="jcj-field">
+              <label for="jcj-name">Your name</label>
+              <input type="text" id="jcj-name" name="name" placeholder="First name works" autocomplete="given-name" required />
+            </div>
+            <div class="jcj-field">
+              <label for="jcj-contact">Phone or email</label>
+              <input type="text" id="jcj-contact" name="contact" placeholder="How should Jacko reach you?" required />
+            </div>
+          </div>
+          <div class="jcj-row">
+            <div class="jcj-field">
+              <label for="jcj-suburb">Suburb</label>
+              <input type="text" id="jcj-suburb" name="suburb" placeholder="e.g. Brighton, Heidelberg" required />
+            </div>
+            <div class="jcj-field">
+              <label for="jcj-when">Rough timing</label>
+              <select id="jcj-when" name="when">
+                <option>This week if you can</option>
+                <option>Next week</option>
+                <option>This month</option>
+                <option>Whenever suits</option>
+              </select>
+            </div>
+          </div>
+          <div class="jcj-field">
+            <label for="jcj-list">The list — what needs doing?</label>
+            <textarea id="jcj-list" name="list" placeholder="Flat-pack in the hallway, two shelves to hang, bit of a tip run… don't overthink it."></textarea>
+          </div>
+          <div class="jcj-note">
+            <b>Heads up:</b> this is a placeholder form while the proper booking form gets set up. Hit submit anyway — your details will be captured once the form's live. Or DM Jacko on Instagram in the meantime.
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg jcj-submit">Send to Jacko →</button>
+        </form>
       </div>
       <div class="card dark" id="donate">
         <div class="tag">Can't book? Still want in?</div>
@@ -716,20 +775,47 @@
     if (s) s.remove();
   }, 2600);
 
-  // Booking form: paste Google Form URL here when ready
-  const FORM_URL = ''; // e.g. 'https://docs.google.com/forms/d/e/XXXXX/viewform'
-  const iframe = document.getElementById('bookingForm');
-  const fallback = document.getElementById('formFallback');
-  if (FORM_URL) {
-    iframe.src = FORM_URL + (FORM_URL.includes('?') ? '&' : '?') + 'embedded=true';
-    fallback.href = FORM_URL;
-  } else {
-    iframe.style.display = 'none';
-    const ph = document.createElement('div');
-    ph.style.cssText = 'padding:32px; text-align:center; background:#EFE3CF; border-radius:12px; color:#3A3732;';
-    ph.innerHTML = '<p style="margin:0 0 10px; font-weight:600; color:#22382A;">Booking form coming online shortly.</p><p style="margin:0; font-size:14px;">In the meantime, flick Jacko a message on <a href="https://www.instagram.com/just.call.jacko" target="_blank" rel="noopener" style="color:#3E6144; font-weight:600;">Instagram</a>.</p>';
-    iframe.parentNode.appendChild(ph);
-    if (fallback) fallback.style.display = 'none';
+  // Placeholder booking form — captures submissions locally and shows a toast.
+  // Swap this whole block for a Google Form iframe once FORM_URL is provided.
+  const form = document.getElementById('bookingForm');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const data = {
+        name: form.name.value.trim(),
+        contact: form.contact.value.trim(),
+        suburb: form.suburb.value.trim(),
+        when: form.when.value,
+        list: form.list.value.trim(),
+        submittedAt: new Date().toISOString(),
+      };
+      if (!data.name || !data.contact || !data.suburb) {
+        showToast('Pop your name, contact and suburb in first 👍');
+        return;
+      }
+      // Persist locally so nothing is lost until the real form is connected.
+      try {
+        const existing = JSON.parse(localStorage.getItem('jcj_bookings') || '[]');
+        existing.push(data);
+        localStorage.setItem('jcj_bookings', JSON.stringify(existing));
+      } catch (err) {}
+      console.log('[Just Call Jacko] booking captured', data);
+      form.reset();
+      showToast("Nice one — Jacko'll be in touch soon.");
+    });
+  }
+
+  function showToast(msg) {
+    let t = document.querySelector('.jcj-toast');
+    if (!t) {
+      t = document.createElement('div');
+      t.className = 'jcj-toast';
+      document.body.appendChild(t);
+    }
+    t.textContent = msg;
+    requestAnimationFrame(() => t.classList.add('show'));
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => t.classList.remove('show'), 3200);
   }
 </script>
 
