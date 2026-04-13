@@ -93,7 +93,12 @@
     overflow: hidden;
   }
   .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 60px; align-items: center; }
-  @media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; } }
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+    /* Video above text on mobile so it's the first thing you see */
+    .hero-grid > div:last-child { order: -1; }
+    .hero-grid > div:first-child { order: 0; }
+  }
 
   .hero-eyebrow {
     display: inline-flex; align-items: center; gap: 8px;
@@ -228,6 +233,74 @@
   .hero-video.playing .hero-play,
   .hero-video.playing .hero-sticker { display: none; }
   .hero-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+  /* Mobile hero tuning — keep video visible, scale type down */
+  @media (max-width: 860px) {
+    .hero { padding: 36px 0 50px; }
+    .hero-video { max-width: 320px; transform: rotate(0.8deg); }
+  }
+  @media (max-width: 520px) {
+    .hero { padding: 28px 0 40px; }
+    .hero h1 { font-size: clamp(42px, 13vw, 64px); }
+    .hero h1 .just { font-size: .22em; }
+    .hero-sub { font-size: 16px; margin-bottom: 20px; }
+    .hero-catch { font-size: 20px; margin-bottom: 22px; }
+    .hero-eyebrow { margin-bottom: 16px; }
+    .hero-ctas .btn { width: 100%; justify-content: center; }
+    .hero-ctas { gap: 10px; margin-bottom: 22px; }
+    .hero-meta { gap: 10px 22px; font-size: 13px; padding-top: 16px; }
+    .hero-video { max-width: 260px; border-radius: 18px; }
+    .hero-play-ico { width: 64px; height: 64px; font-size: 22px; }
+    .hero-play-label { font-size: 11px; padding: 6px 12px; }
+    .hero-sticker { font-size: 14px; padding: 10px 14px; bottom: -10px; left: -8px; }
+    .hero-sticker b { font-size: 20px; }
+  }
+  @media (max-width: 400px) {
+    .wrap { padding: 0 18px; }
+    .hero-video { max-width: 230px; }
+  }
+
+  /* Jules tagline strip — handwritten pull quote */
+  .jules-strip {
+    background: var(--green-deep);
+    color: var(--cream);
+    padding: 44px 0;
+    border-top: 3px solid var(--mustard);
+    border-bottom: 3px solid var(--mustard);
+    position: relative;
+  }
+  .jules-wrap { text-align: center; }
+  .jules-quote {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(32px, 5vw, 54px);
+    line-height: 1.1;
+    color: var(--cream);
+    position: relative;
+    display: inline-block;
+    padding: 0 8px;
+  }
+  .jules-quote b { color: var(--mustard); font-weight: 700; }
+  .jules-mark {
+    color: var(--mustard);
+    font-family: Georgia, serif;
+    font-size: 1.3em;
+    line-height: 0;
+    position: relative;
+    top: .1em;
+    margin: 0 4px;
+  }
+  .jules-attr {
+    margin-top: 10px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(249,243,229,.7);
+  }
+  @media (max-width: 520px) {
+    .jules-strip { padding: 34px 0; }
+    .jules-quote { font-size: 30px; }
+  }
 
   /* Meet Polly strip */
   .meet-polly {
@@ -773,7 +846,7 @@
     </div>
     <div>
       <div class="hero-video" id="heroVideo" role="button" tabindex="0" aria-label="Play the Just Call Jacko story">
-        <img src="https://img.youtube.com/vi/rFx6ukWWRns/maxresdefault.jpg" alt="Tap to play the Just Call Jacko story" loading="eager" />
+        <img src="https://img.youtube.com/vi/rFx6ukWWRns/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/rFx6ukWWRns/hqdefault.jpg';" alt="Tap to play the Just Call Jacko story" loading="eager" fetchpriority="high" />
         <div class="hero-play">
           <span class="hero-play-ico" aria-hidden="true">▶</span>
           <div class="hero-play-label">Press play · the story</div>
@@ -786,6 +859,67 @@
     </div>
   </div>
 </header>
+
+<!-- Why -->
+<section class="why" id="why">
+  <div class="wrap">
+    <div class="why-grid">
+      <div>
+        <div class="why-kicker">the why —</div>
+        <h2>Why we're doing this.</h2>
+        <p>
+          Mikey — Jacko to everyone who knows him — is a dad of <b>three kids</b>.
+          His youngest, Polly, has spent the last twelve months fighting a brain
+          tumour. Surgery, chemo, three months in the US for proton radiation,
+          and a bell-ringing flight home in January with Polly in remission.
+        </p>
+        <p>
+          Both Mikey and his wife <b>Claire</b> have stepped out of full-time
+          work to carry Polly through her recovery, keep the household running,
+          and be there for all three kids — with five years of monthly monitoring
+          still ahead. That's the reality, and it's not going away quickly.
+        </p>
+        <p>
+          Rather than hand out a GoFundMe link, Mikey's doing what he's always
+          done — <b>picking up his tools</b>. Book him for a day. $500, flat.
+          The money goes straight to his family. That's it.
+        </p>
+        <p class="why-tag">
+          No handout. Just <b>a mate, a ute, and a list</b> — sorted.
+        </p>
+        <div style="margin-top: 28px; display: flex; flex-wrap: wrap; gap: 14px;">
+          <a href="#book" class="btn btn-primary btn-lg">Book Jacko →</a>
+          <a href="https://www.gofundme.com/f/pfphe5-support-for-polly" target="_blank" rel="noopener" class="btn btn-link">Read Polly's story on the GoFundMe →</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="polly-carousel" id="pollyCarousel">
+          <div class="pc-track" id="pcTrack">
+            <div class="pc-slide"><img src="assets/polly-story-1.png" alt="This is Polly — diagnosed with brain cancer at 3, in surgery for 14hrs the next day." loading="lazy" /></div>
+            <div class="pc-slide"><img src="assets/polly-story-2.png" alt="The last 12 months — walking again, chemo, USA for radiation. Home in Jan 2026, in remission." loading="lazy" /></div>
+            <div class="pc-slide"><img src="assets/polly-story-3.png" alt="Polly now lives with an acquired brain injury and Posterior Fossa Syndrome. Both parents full-time carers." loading="lazy" /></div>
+            <div class="pc-slide"><img src="assets/polly-family.jpg" alt="The Jackett family — ice cream day during the US treatment trip" loading="lazy" /></div>
+          </div>
+          <div class="pc-dots" id="pcDots"></div>
+          <div class="pc-caption">Polly's journey · swipe to keep going →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Jules tagline strip -->
+<section class="jules-strip" aria-label="Jules Lund on Jacko">
+  <div class="wrap jules-wrap">
+    <div class="jules-quote">
+      <span class="jules-mark">&ldquo;</span>
+      Bloody good handyman. <b>Even better dad.</b>
+      <span class="jules-mark jules-mark-r">&rdquo;</span>
+    </div>
+    <div class="jules-attr">— Jules Lund</div>
+  </div>
+</section>
 
 <!-- Meet Polly -->
 <section class="meet-polly">
@@ -991,55 +1125,6 @@
         <div class="step-n">03</div>
         <h3>Day of. Done.</h3>
         <p>Jacko rocks up, knocks it over, you pay $500 on the day. Everyone wins.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Why -->
-<section class="why" id="why">
-  <div class="wrap">
-    <div class="why-grid">
-      <div>
-        <div class="why-kicker">the why —</div>
-        <h2>Why we're doing this.</h2>
-        <p>
-          Mikey — Jacko to everyone who knows him — is a dad of <b>three kids</b>.
-          His youngest, Polly, has spent the last twelve months fighting a brain
-          tumour. Surgery, chemo, three months in the US for proton radiation,
-          and a bell-ringing flight home in January with Polly in remission.
-        </p>
-        <p>
-          Both Mikey and his wife <b>Claire</b> have stepped out of full-time
-          work to carry Polly through her recovery, keep the household running,
-          and be there for all three kids — with five years of monthly monitoring
-          still ahead. That's the reality, and it's not going away quickly.
-        </p>
-        <p>
-          Rather than hand out a GoFundMe link, Mikey's doing what he's always
-          done — <b>picking up his tools</b>. Book him for a day. $500, flat.
-          The money goes straight to his family. That's it.
-        </p>
-        <p class="why-tag">
-          No handout. Just <b>a mate, a ute, and a list</b> — sorted.
-        </p>
-        <div style="margin-top: 28px; display: flex; flex-wrap: wrap; gap: 14px;">
-          <a href="#book" class="btn btn-primary btn-lg">Book Jacko →</a>
-          <a href="https://www.gofundme.com/f/pfphe5-support-for-polly" target="_blank" rel="noopener" class="btn btn-link">Read Polly's story on the GoFundMe →</a>
-        </div>
-      </div>
-
-      <div>
-        <div class="polly-carousel" id="pollyCarousel">
-          <div class="pc-track" id="pcTrack">
-            <div class="pc-slide"><img src="assets/polly-story-1.png" alt="This is Polly — diagnosed with brain cancer at 3, in surgery for 14hrs the next day." loading="lazy" /></div>
-            <div class="pc-slide"><img src="assets/polly-story-2.png" alt="The last 12 months — walking again, chemo, USA for radiation. Home in Jan 2026, in remission." loading="lazy" /></div>
-            <div class="pc-slide"><img src="assets/polly-story-3.png" alt="Polly now lives with an acquired brain injury and Posterior Fossa Syndrome. Both parents full-time carers." loading="lazy" /></div>
-            <div class="pc-slide"><img src="assets/polly-family.jpg" alt="The Jackett family — ice cream day during the US treatment trip" loading="lazy" /></div>
-          </div>
-          <div class="pc-dots" id="pcDots"></div>
-          <div class="pc-caption">Polly's journey · swipe to keep going →</div>
-        </div>
       </div>
     </div>
   </div>
