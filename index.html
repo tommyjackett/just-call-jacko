@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Just Call Jacko — Your Local Handyman, Melbourne</title>
+<meta name="description" content="If it's broken, crooked, half-built or just never gets done — Just Call Jacko. Flat-pack, shelving, painting, garden, tip runs. $500 a day. Book Jacko and the money goes straight to his family." />
+<meta property="og:title" content="Just Call Jacko" />
+<meta property="og:description" content="Your local handyman. Melbourne. Book a day, get stuff done, help a family stay standing." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --green-deep: #22382A;
+    --green: #3E6144;
+    --green-soft: #7C9A7E;
+    --cream: #F4EBDD;
+    --cream-warm: #EFE3CF;
+    --sand: #E3D4BA;
+    --ink: #1C1A17;
+    --ink-soft: #3A3732;
+    --mustard: #D69B3A;
+    --brick: #B5532A;
+    --max: 1180px;
+    --radius: 18px;
+    --radius-lg: 28px;
+    --shadow-sm: 0 2px 8px rgba(28,26,23,.08);
+    --shadow: 0 14px 40px -14px rgba(28,26,23,.28);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.55;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: var(--green-deep); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
+  .serif { font-family: 'DM Serif Display', Georgia, serif; font-weight: 400; letter-spacing: -0.01em; }
+  .scribble { font-family: 'Caveat', cursive; }
+
+  /* Nav */
+  .nav {
+    position: sticky; top: 0; z-index: 40;
+    background: rgba(244,235,221,.92);
+    backdrop-filter: saturate(1.2) blur(10px);
+    border-bottom: 1px solid rgba(34,56,42,.08);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 22px; max-width: var(--max); margin: 0 auto;
+  }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--green-deep); letter-spacing: -0.01em; }
+  .nav-logo span { color: var(--brick); }
+  .nav-links { display: flex; gap: 26px; align-items: center; }
+  .nav-links a { font-weight: 500; font-size: 15px; color: var(--ink-soft); }
+  .nav-links a:hover { color: var(--green-deep); text-decoration: none; }
+  @media (max-width: 720px) { .nav-links a:not(.btn) { display: none; } }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 13px 22px; border-radius: 999px;
+    font-weight: 600; font-size: 15px;
+    border: 2px solid transparent; cursor: pointer;
+    transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
+    text-decoration: none !important;
+  }
+  .btn-primary { background: var(--green-deep); color: var(--cream); }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+  .btn-secondary { background: transparent; color: var(--green-deep); border-color: var(--green-deep); }
+  .btn-secondary:hover { background: var(--green-deep); color: var(--cream); }
+  .btn-mustard { background: var(--mustard); color: var(--ink); }
+  .btn-mustard:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+  .btn-lg { padding: 16px 28px; font-size: 16px; }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    padding: 80px 0 70px;
+    background:
+      radial-gradient(circle at 20% 0%, rgba(214,155,58,.18), transparent 45%),
+      radial-gradient(circle at 90% 100%, rgba(62,97,68,.12), transparent 50%),
+      var(--cream);
+    overflow: hidden;
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 60px; align-items: center; }
+  @media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 600; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--green);
+    background: rgba(62,97,68,.1);
+    padding: 7px 14px; border-radius: 999px;
+    margin-bottom: 22px;
+  }
+  .hero-eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(54px, 9vw, 108px);
+    line-height: .92;
+    margin: 0 0 24px;
+    color: var(--green-deep);
+    letter-spacing: -0.02em;
+  }
+  .hero h1 .just {
+    display: block;
+    color: var(--ink);
+    font-size: .2em;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .hero h1 .call { display: block; }
+  .hero h1 .jacko {
+    display: block;
+    color: var(--brick);
+    position: relative;
+  }
+  .hero h1 .jacko::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 22%; bottom: 6px;
+    height: 10px;
+    background: rgba(214,155,58,.55);
+    border-radius: 4px;
+    z-index: -1;
+  }
+  .hero-sub {
+    font-size: clamp(18px, 2vw, 22px);
+    color: var(--ink-soft);
+    max-width: 540px;
+    margin: 0 0 28px;
+  }
+  .hero-sub b { color: var(--ink); }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 28px; }
+  .hero-meta {
+    display: flex; flex-wrap: wrap; gap: 20px 30px;
+    font-size: 14px; color: var(--ink-soft);
+    border-top: 1px solid rgba(34,56,42,.12);
+    padding-top: 22px;
+  }
+  .hero-meta b { color: var(--green-deep); }
+
+  .hero-visual {
+    position: relative;
+    aspect-ratio: 4/5;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--sand);
+    box-shadow: var(--shadow);
+    transform: rotate(1.5deg);
+  }
+  .hero-visual img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-sticker {
+    position: absolute; bottom: -14px; left: -14px;
+    background: var(--mustard); color: var(--ink);
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px; padding: 14px 18px;
+    border-radius: 14px; box-shadow: var(--shadow-sm);
+    transform: rotate(-4deg);
+  }
+  .hero-sticker b { display: block; font-size: 26px; line-height: 1; }
+
+  /* Sections */
+  section { padding: 90px 0; }
+  .section-label {
+    font-size: 13px; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--green);
+    margin-bottom: 14px;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(32px, 4.5vw, 52px);
+    line-height: 1.05;
+    color: var(--green-deep);
+    margin: 0 0 18px;
+    letter-spacing: -0.01em;
+  }
+  .section-lead {
+    font-size: 19px; color: var(--ink-soft);
+    max-width: 640px; margin: 0 0 40px;
+  }
+
+  /* Services */
+  .services { background: var(--cream-warm); }
+  .services-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; margin-bottom: 40px; flex-wrap: wrap; }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 900px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+  .service {
+    background: var(--cream);
+    border: 2px solid rgba(34,56,42,.12);
+    border-radius: var(--radius);
+    padding: 22px 20px;
+    transition: transform .2s ease, border-color .2s ease, background .2s ease;
+  }
+  .service:hover { transform: translateY(-3px); border-color: var(--green); background: #fff; }
+  .service-icon { font-size: 32px; margin-bottom: 14px; display: block; }
+  .service h3 { margin: 0 0 6px; font-size: 17px; color: var(--green-deep); }
+  .service p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.45; }
+  .service-plus { background: var(--green-deep); color: var(--cream); border: none; }
+  .service-plus h3, .service-plus p { color: var(--cream); }
+
+  .services-footer {
+    margin-top: 34px; display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 18px;
+    background: var(--green-deep); color: var(--cream);
+    padding: 28px 32px; border-radius: var(--radius-lg);
+  }
+  .services-footer .price { font-family: 'DM Serif Display', serif; font-size: 42px; line-height: 1; }
+  .services-footer .price small { font-size: 16px; opacity: .75; font-family: 'Inter', sans-serif; font-weight: 500; margin-left: 4px; }
+  .services-footer .pitch { max-width: 420px; font-size: 15px; opacity: .9; }
+
+  /* In Action */
+  .action { background: var(--cream); }
+  .action-head { text-align: center; margin-bottom: 40px; }
+  .action-head .section-lead { margin-left: auto; margin-right: auto; }
+  .action-grid {
+    display: grid;
+    grid-template-columns: 1.2fr .9fr .9fr;
+    grid-template-rows: 220px 220px;
+    gap: 14px;
+  }
+  @media (max-width: 800px) {
+    .action-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 180px); }
+    .action-grid .a1 { grid-column: 1 / span 2; grid-row: 1; }
+  }
+  .action-cell { border-radius: var(--radius); overflow: hidden; background: var(--sand); position: relative; }
+  .action-cell img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+  .action-cell:hover img { transform: scale(1.05); }
+  .a1 { grid-row: 1 / span 2; }
+  .action-caption {
+    position: absolute; left: 14px; bottom: 14px;
+    background: rgba(34,56,42,.92); color: var(--cream);
+    font-size: 12px; font-weight: 600; letter-spacing: .03em;
+    padding: 7px 12px; border-radius: 999px;
+  }
+  .action-cta {
+    background: var(--green-deep) !important;
+    color: var(--cream); padding: 22px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+
+  /* Reviews */
+  .reviews { background: var(--green-deep); color: var(--cream); }
+  .reviews .section-label { color: var(--mustard); }
+  .reviews .section-title { color: var(--cream); }
+  .reviews-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center; }
+  @media (max-width: 860px) { .reviews-grid { grid-template-columns: 1fr; } }
+  .review-quote-lg {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 3.5vw, 44px);
+    line-height: 1.15;
+    color: var(--cream);
+    margin: 0 0 22px;
+  }
+  .review-quote-lg .mark { color: var(--mustard); }
+  .review-meta { font-size: 15px; opacity: .75; }
+  .review-meta b { color: var(--mustard); }
+  .review-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 20px;
+    background: rgba(214,155,58,.2); color: var(--mustard);
+    padding: 8px 14px; border-radius: 999px; font-weight: 600; font-size: 14px;
+  }
+  .review-card {
+    background: var(--cream); border-radius: var(--radius);
+    padding: 10px; box-shadow: var(--shadow);
+    transform: rotate(-1.5deg);
+  }
+  .review-card img { border-radius: 12px; }
+
+  /* How */
+  .how { background: var(--cream-warm); }
+  .how-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 10px; }
+  @media (max-width: 800px) { .how-steps { grid-template-columns: 1fr; } }
+  .step { background: var(--cream); border-radius: var(--radius); padding: 28px; border: 2px solid rgba(34,56,42,.08); }
+  .step-n { font-family: 'DM Serif Display', serif; color: var(--brick); font-size: 52px; line-height: 1; margin-bottom: 14px; }
+  .step h3 { margin: 0 0 8px; font-size: 20px; color: var(--green-deep); }
+  .step p { margin: 0; color: var(--ink-soft); font-size: 15px; }
+
+  /* Why */
+  .why { background: var(--cream); }
+  .why-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 60px; align-items: start; }
+  @media (max-width: 900px) { .why-grid { grid-template-columns: 1fr; gap: 32px; } }
+  .why-kicker {
+    font-family: 'Caveat', cursive;
+    color: var(--brick); font-size: 30px;
+    transform: rotate(-2deg);
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+  .why h2 { font-family: 'DM Serif Display', serif; font-size: clamp(32px, 4.5vw, 48px); color: var(--green-deep); margin: 0 0 22px; line-height: 1.05; }
+  .why p { font-size: 17px; color: var(--ink-soft); margin: 0 0 14px; }
+  .why p b { color: var(--ink); }
+  .why-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 26px 0 10px; }
+  .stat {
+    background: var(--cream-warm); padding: 20px; border-radius: var(--radius);
+    border-left: 4px solid var(--green);
+  }
+  .stat b { display: block; font-family: 'DM Serif Display', serif; font-size: 32px; color: var(--green-deep); line-height: 1; margin-bottom: 6px; }
+  .stat span { font-size: 14px; color: var(--ink-soft); }
+  .video-wrap {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--ink);
+    box-shadow: var(--shadow);
+    aspect-ratio: 9/16;
+    max-width: 380px;
+    margin: 0 auto;
+  }
+  .video-wrap iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+  /* Split */
+  .split { background: var(--cream-warm); padding: 100px 0; }
+  .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 860px) { .split-grid { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--cream);
+    padding: 44px 36px;
+    border-radius: var(--radius-lg);
+    border: 2px solid rgba(34,56,42,.1);
+    display: flex; flex-direction: column;
+  }
+  .card.dark { background: var(--green-deep); color: var(--cream); border-color: var(--green-deep); }
+  .card .tag { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--green); margin-bottom: 10px; }
+  .card.dark .tag { color: var(--mustard); }
+  .card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px; line-height: 1.05;
+    margin: 0 0 14px;
+    color: var(--green-deep);
+  }
+  .card.dark h3 { color: var(--cream); }
+  .card p { margin: 0 0 24px; font-size: 16px; color: var(--ink-soft); }
+  .card.dark p { color: rgba(244,235,221,.85); }
+  .card .cta-row { margin-top: auto; display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .form-embed { margin-top: 18px; border-radius: var(--radius); overflow: hidden; background: var(--cream); }
+  .form-embed iframe { width: 100%; min-height: 640px; border: 0; display: block; }
+
+  /* Footer */
+  footer { background: var(--green-deep); color: var(--cream); padding: 60px 0 40px; }
+  .foot-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 30px; }
+  @media (max-width: 800px) { .foot-grid { grid-template-columns: 1fr; } }
+  footer h4 { font-family: 'DM Serif Display', serif; font-size: 24px; margin: 0 0 10px; color: var(--cream); }
+  footer p, footer a, footer li { color: rgba(244,235,221,.8); font-size: 14px; }
+  footer a:hover { color: var(--mustard); text-decoration: none; }
+  footer ul { list-style: none; padding: 0; margin: 0; }
+  footer ul li { margin-bottom: 6px; }
+  .foot-bottom {
+    margin-top: 40px; padding-top: 22px;
+    border-top: 1px solid rgba(244,235,221,.12);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+    font-size: 13px; opacity: .7;
+  }
+
+  /* Splash */
+  .splash {
+    position: fixed; inset: 0; z-index: 100;
+    background: var(--green-deep);
+    display: flex; align-items: center; justify-content: center;
+    animation: splashOut 2.4s ease forwards;
+    pointer-events: none;
+  }
+  .splash-text {
+    font-family: 'DM Serif Display', serif;
+    color: var(--cream);
+    font-size: clamp(48px, 9vw, 100px);
+    text-align: center;
+    line-height: .95;
+    letter-spacing: -0.02em;
+  }
+  .splash-text .w {
+    display: inline-block; opacity: 0;
+    transform: translateY(14px);
+    animation: splashWord .6s ease forwards;
+  }
+  .splash-text .w1 { animation-delay: .1s; }
+  .splash-text .w2 { animation-delay: .35s; }
+  .splash-text .w3 { animation-delay: .6s; color: var(--mustard); }
+  @keyframes splashWord { to { opacity: 1; transform: translateY(0); } }
+  @keyframes splashOut {
+    0%, 70% { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+  }
+  @media (prefers-reduced-motion: reduce) { .splash { animation: none; opacity: 0; visibility: hidden; } }
+</style>
+</head>
+<body>
+
+<!-- Splash -->
+<div class="splash" aria-hidden="true">
+  <div class="splash-text">
+    <span class="w w1">Just</span> <span class="w w2">Call</span><br/>
+    <span class="w w3">Jacko.</span>
+  </div>
+</div>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-logo">Just Call <span>Jacko.</span></a>
+    <div class="nav-links">
+      <a href="#services">What he does</a>
+      <a href="#action">In action</a>
+      <a href="#why">The why</a>
+      <a href="#book" class="btn btn-primary" style="padding:10px 18px;font-size:14px;">Book Jacko</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="hero-eyebrow"><span class="dot"></span> Melbourne · Handyman · Good bloke</span>
+      <h1>
+        <span class="just">Your local handyman</span>
+        <span class="call">Just Call</span>
+        <span class="jacko">Jacko.</span>
+      </h1>
+      <p class="hero-sub">
+        If it's <b>broken, crooked, half-built</b> or just never gets done —
+        Jacko's the mate you call. Flat-pack in the corner? Shelf that's been
+        leaning for a month? Garage full of stuff for the tip? <b>Sorted.</b>
+      </p>
+      <div class="hero-ctas">
+        <a href="#book" class="btn btn-primary btn-lg">Book Jacko →</a>
+        <a href="#why" class="btn btn-secondary btn-lg">The story behind it</a>
+      </div>
+      <div class="hero-meta">
+        <div><b>$500</b> flat · full day's work</div>
+        <div><b>Friends &amp; friends-of-friends</b></div>
+        <div><b>100%</b> goes to his family</div>
+      </div>
+    </div>
+    <div>
+      <div class="hero-visual">
+        <img src="assets/jacko-in-action-1.jpg" alt="Jacko installing privacy screens in a Melbourne backyard" />
+        <div class="hero-sticker">
+          Handiest man<br/>
+          <b>I know.</b>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Services -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="services-head">
+      <div>
+        <div class="section-label">What he does</div>
+        <h2 class="section-title">Stuff you've been meaning to get done.</h2>
+        <p class="section-lead" style="margin-bottom:0;">Jacko's not a tradie. He's a mate with tools, a ute, and a knack for getting things done before lunch. Here's what he's up for:</p>
+      </div>
+    </div>
+
+    <div class="services-grid">
+      <div class="service">
+        <span class="service-icon">🔧</span>
+        <h3>Flat-pack assembly</h3>
+        <p>That IKEA box staring at you from the hallway? Handled.</p>
+      </div>
+      <div class="service">
+        <span class="service-icon">📐</span>
+        <h3>Shelving &amp; hanging</h3>
+        <p>Pictures, mirrors, floating shelves — straight the first time.</p>
+      </div>
+      <div class="service">
+        <span class="service-icon">🎨</span>
+        <h3>Painting &amp; patching</h3>
+        <p>Scuffed walls, chipped skirting, that mystery hole. Fixed.</p>
+      </div>
+      <div class="service">
+        <span class="service-icon">🌱</span>
+        <h3>Garden tidy-up</h3>
+        <p>Mowing, weeding, hedging, making the yard look sorted.</p>
+      </div>
+      <div class="service">
+        <span class="service-icon">📦</span>
+        <h3>Moving &amp; lifting</h3>
+        <p>Couches up stairs, fridges out, awkward furniture — no drama.</p>
+      </div>
+      <div class="service">
+        <span class="service-icon">🏷️</span>
+        <h3>Marketplace magic</h3>
+        <p>Turn old stuff into cash. Jacko lists, replies, sells.</p>
+      </div>
+      <div class="service">
+        <span class="service-icon">🚛</span>
+        <h3>Hard rubbish &amp; tip runs</h3>
+        <p>Declutter the shed. Jacko loads it, Jacko dumps it.</p>
+      </div>
+      <div class="service service-plus">
+        <span class="service-icon">✨</span>
+        <h3>Odd jobs, basically.</h3>
+        <p>If it's on the list and it's not massive, he'll give it a crack.</p>
+      </div>
+    </div>
+
+    <div class="services-footer">
+      <div>
+        <div class="price">$500<small>/day</small></div>
+        <div class="pitch">One flat rate. Full day. Bring the list.</div>
+      </div>
+      <a href="#book" class="btn btn-mustard btn-lg">Book a day →</a>
+    </div>
+  </div>
+</section>
+
+<!-- In Action -->
+<section class="action" id="action">
+  <div class="wrap action-head">
+    <div class="section-label">In action</div>
+    <h2 class="section-title">He's already at it.</h2>
+    <p class="section-lead">A few of the jobs Jacko's knocked over around Melbourne since this kicked off.</p>
+  </div>
+  <div class="wrap">
+    <div class="action-grid">
+      <div class="action-cell a1">
+        <img src="assets/jacko-in-action-1.jpg" alt="Jacko installing privacy screens" loading="lazy" />
+        <div class="action-caption">Privacy screens · installed</div>
+      </div>
+      <div class="action-cell">
+        <img src="assets/jacko-in-action-2.jpg" alt="Jacko on site" loading="lazy" />
+        <div class="action-caption">On the tools</div>
+      </div>
+      <div class="action-cell">
+        <img src="assets/jacko-in-action-3.jpg" alt="Jacko on site" loading="lazy" />
+        <div class="action-caption">Outdoor fix-up</div>
+      </div>
+      <div class="action-cell">
+        <img src="assets/jacko-in-action-4.jpg" alt="Jacko on site" loading="lazy" />
+        <div class="action-caption">Another one done</div>
+      </div>
+      <div class="action-cell action-cta">
+        <div class="scribble" style="font-size:26px; color: var(--mustard); line-height:1;">next up?</div>
+        <div style="font-family:'DM Serif Display',serif; font-size:24px; line-height:1.1; margin-top:8px;">Your list.</div>
+        <a href="#book" style="color:var(--mustard); font-weight:600; margin-top:14px; font-size:14px;">Book a day →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="reviews">
+  <div class="wrap">
+    <div class="section-label">Reviews</div>
+    <h2 class="section-title">The early feedback.</h2>
+    <div class="reviews-grid">
+      <div>
+        <p class="review-quote-lg">
+          <span class="mark">"</span>Jacko came and got stuck into a huge list — privacy screens, shelving, the lot. <b>10/10 service.</b> Would 100% book him again.<span class="mark">"</span>
+        </p>
+        <div class="review-meta">— Imogen · <b>Melbourne</b> · first customer</div>
+        <div class="review-badge">★★★★★ Actual customer · April 2026</div>
+      </div>
+      <div class="review-card">
+        <img src="assets/review-imogen.png" alt="Imogen's review of Jacko's work" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How -->
+<section class="how">
+  <div class="wrap">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title">Book a day. Get stuff done.</h2>
+    <p class="section-lead">No invoices, no quotes, no faff. You pick a day, Jacko shows up, the list gets shorter.</p>
+    <div class="how-steps">
+      <div class="step">
+        <div class="step-n">01</div>
+        <h3>Fill in the form</h3>
+        <p>Expression of interest below. Give Jacko a rough idea of the jobs and your suburb.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">02</div>
+        <h3>Jacko reaches out</h3>
+        <p>He'll send a message, lock in a day, and double-check anything he needs to bring.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">03</div>
+        <h3>Day of. Done.</h3>
+        <p>Jacko rocks up, knocks it over, you pay $500 on the day. Everyone wins.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why -->
+<section class="why" id="why">
+  <div class="wrap">
+    <div class="why-grid">
+      <div>
+        <div class="why-kicker">the why —</div>
+        <h2>So why is the whole neighbourhood telling you to call Jacko?</h2>
+        <p>Jacko's real name is <b>Michael Jackett</b>. In February 2025, his four-year-old daughter <b>Polly</b> was diagnosed with brain cancer. The next morning, she was in surgery for 14 hours.</p>
+        <p>What followed was the hardest year of their lives — chemo at the Royal Children's, then 12 weeks of proton radiation therapy in the US, then home for a long road of recovery.</p>
+        <p>In Feb 2026, Polly's first post-treatment scan came back <b>all clear</b>. She's five now. Still flashing peace signs. Still fierce.</p>
+        <p>But "all clear" doesn't mean "all done." Polly lives with Posterior Fossa Syndrome — ongoing mobility, balance and regulation challenges. Both <b>Michael and his wife Claire</b> are full-time carers. Neither can go back to a regular job. The family has MRI scans every three months for the next two years.</p>
+        <p><b>Just Call Jacko is how he keeps doing what he's always done — fixing things for people — while being there for his kid.</b> Book him, and the money goes straight to keeping his family standing.</p>
+
+        <div class="why-stats">
+          <div class="stat"><b>5 yrs</b><span>of monitoring ahead</span></div>
+          <div class="stat"><b>$10k/mo</b><span>family baseline cost</span></div>
+          <div class="stat"><b>3</b><span>kids at home</span></div>
+          <div class="stat"><b>2026</b><span>the year that matters</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="video-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/rFx6ukWWRns"
+            title="Polly's story"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+        </div>
+        <p style="text-align:center; font-size:13px; color: var(--ink-soft); margin-top:14px;">Polly's story · a short watch</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Book / Donate -->
+<section class="split" id="book">
+  <div class="wrap">
+    <div class="split-grid">
+      <div class="card">
+        <div class="tag">Got a list?</div>
+        <h3>Book Jacko for a day.</h3>
+        <p>Fill this in and Jacko will be in touch to lock in a day. $500 flat. One day, one list, one good bloke.</p>
+        <div class="form-embed">
+          <iframe
+            src="about:blank"
+            id="bookingForm"
+            title="Book Jacko — Expression of Interest"
+            loading="lazy"></iframe>
+        </div>
+        <p style="font-size:13px; color:var(--ink-soft); margin-top:16px;">
+          Form not loading? <a href="#" id="formFallback">Open it in a new tab →</a>
+        </p>
+      </div>
+      <div class="card dark" id="donate">
+        <div class="tag">Can't book? Still want in?</div>
+        <h3>Chuck into the GoFundMe.</h3>
+        <p>For mates who don't have a list but want to help anyway. Every dollar goes to keeping the Jackett family stable through Polly's most critical year of monitoring.</p>
+        <div class="cta-row">
+          <a href="https://www.gofundme.com/f/pfphe5-support-for-polly" target="_blank" rel="noopener" class="btn btn-mustard btn-lg">Open GoFundMe →</a>
+        </div>
+        <div style="margin-top:22px; background: var(--cream); padding: 16px; border-radius: 12px;">
+          <div class="gfm-embed" data-url="https://www.gofundme.com/f/pfphe5-support-for-polly/widget/medium/"></div>
+          <script defer src="https://www.gofundme.com/static/js/embed.js"></script>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Just Call Jacko.</h4>
+        <p>Your local handyman in Melbourne. Built by the mates who love this family. Powered by a good bloke and his ute.</p>
+        <p style="margin-top:18px;"><span class="scribble" style="color:var(--mustard); font-size:24px;">Appreciate you all more than you know.</span></p>
+      </div>
+      <div>
+        <h4 style="font-size:16px; font-family:'Inter',sans-serif; font-weight:700;">Get stuck in</h4>
+        <ul>
+          <li><a href="#services">What Jacko does</a></li>
+          <li><a href="#action">In action</a></li>
+          <li><a href="#book">Book a day</a></li>
+          <li><a href="#donate">Donate instead</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="font-size:16px; font-family:'Inter',sans-serif; font-weight:700;">Follow along</h4>
+        <ul>
+          <li><a href="https://www.instagram.com/just.call.jacko" target="_blank" rel="noopener">Instagram @just.call.jacko</a></li>
+          <li><a href="https://www.gofundme.com/f/pfphe5-support-for-polly" target="_blank" rel="noopener">GoFundMe for Polly</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>© 2026 Just Call Jacko · Melbourne, Australia</div>
+      <div>Made with love by the neighbourhood.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Remove splash after animation
+  setTimeout(() => {
+    const s = document.querySelector('.splash');
+    if (s) s.remove();
+  }, 2600);
+
+  // Booking form: paste Google Form URL here when ready
+  const FORM_URL = ''; // e.g. 'https://docs.google.com/forms/d/e/XXXXX/viewform'
+  const iframe = document.getElementById('bookingForm');
+  const fallback = document.getElementById('formFallback');
+  if (FORM_URL) {
+    iframe.src = FORM_URL + (FORM_URL.includes('?') ? '&' : '?') + 'embedded=true';
+    fallback.href = FORM_URL;
+  } else {
+    iframe.style.display = 'none';
+    const ph = document.createElement('div');
+    ph.style.cssText = 'padding:32px; text-align:center; background:#EFE3CF; border-radius:12px; color:#3A3732;';
+    ph.innerHTML = '<p style="margin:0 0 10px; font-weight:600; color:#22382A;">Booking form coming online shortly.</p><p style="margin:0; font-size:14px;">In the meantime, flick Jacko a message on <a href="https://www.instagram.com/just.call.jacko" target="_blank" rel="noopener" style="color:#3E6144; font-weight:600;">Instagram</a>.</p>';
+    iframe.parentNode.appendChild(ph);
+    if (fallback) fallback.style.display = 'none';
+  }
+</script>
+
+</body>
+</html>
