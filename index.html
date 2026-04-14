@@ -173,14 +173,18 @@
     transform: rotate(1.5deg);
   }
   .hero-visual img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-video-wrap {
+    position: relative;
+  }
   .hero-sticker {
-    position: absolute; bottom: -32px; left: -44px;
+    position: absolute; bottom: 40px; left: -60px;
     background: var(--mustard); color: var(--ink);
     font-family: 'DM Serif Display', serif;
-    font-size: 20px; padding: 16px 22px;
-    border-radius: 16px; box-shadow: 0 12px 28px rgba(34,56,42,.18);
+    font-size: 22px; padding: 18px 24px;
+    border-radius: 18px; box-shadow: 0 14px 32px rgba(34,56,42,.22);
     transform: rotate(-5deg);
     z-index: 5;
+    white-space: nowrap;
   }
   .hero-sticker b { display: block; font-size: 26px; line-height: 1; }
 
@@ -254,7 +258,7 @@
     .hero-video { max-width: 260px; border-radius: 18px; }
     .hero-play-ico { width: 64px; height: 64px; font-size: 22px; }
     .hero-play-label { font-size: 11px; padding: 6px 12px; }
-    .hero-sticker { font-size: 15px; padding: 12px 16px; bottom: -22px; left: -18px; z-index: 5; }
+    .hero-sticker { font-size: 16px; padding: 12px 16px; bottom: 30px; left: -14px; z-index: 5; }
     .hero-sticker b { font-size: 22px; }
   }
   @media (max-width: 400px) {
@@ -909,17 +913,17 @@
         <a href="#how-he-helps" class="btn btn-secondary btn-lg">See what he can help with</a>
       </div>
     </div>
-    <div>
+    <div class="hero-video-wrap">
       <div class="hero-video" id="heroVideo" role="button" tabindex="0" aria-label="Play the Just Call Jacko story">
         <img src="https://img.youtube.com/vi/rFx6ukWWRns/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/rFx6ukWWRns/hqdefault.jpg';" alt="Tap to play the Just Call Jacko story" loading="eager" fetchpriority="high" />
         <div class="hero-play">
           <span class="hero-play-ico" aria-hidden="true">▶</span>
           <div class="hero-play-label">Press play · the story</div>
         </div>
-        <div class="hero-sticker">
-          Handiest man<br/>
-          <b>I know.</b>
-        </div>
+      </div>
+      <div class="hero-sticker">
+        Handiest man<br/>
+        <b>I know.</b>
       </div>
     </div>
   </div>
@@ -1029,6 +1033,32 @@
   </div>
 </section>
 
+<!-- How it works -->
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title">Book Jacko. Get stuff done.</h2>
+    <p class="section-lead">No invoices, no quotes, no faff. You send through a list, Jacko shows up, the list gets shorter.</p>
+    <div class="how-steps">
+      <div class="step">
+        <div class="step-n">01</div>
+        <h3>Fill in the form</h3>
+        <p>A rough idea of the jobs, your suburb, whether you've got the materials ready.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">02</div>
+        <h3>Jacko reaches out</h3>
+        <p>He'll send a message, lock in a day, and work out anything he needs to bring.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">03</div>
+        <h3>Day of. Done.</h3>
+        <p>Jacko rocks up, helps you knock it over, and you chip in a donation (around $500 for a full day) straight to the family.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Services -->
 <section class="services" id="services">
   <div class="wrap" id="how-he-helps">
@@ -1094,32 +1124,6 @@
         <div class="pitch">Going rate for a full day's help. Goes straight to the family.</div>
       </div>
       <a href="#book" class="btn btn-mustard btn-lg">Book Jacko →</a>
-    </div>
-  </div>
-</section>
-
-<!-- How it works -->
-<section class="how" id="how">
-  <div class="wrap">
-    <div class="section-label">How it works</div>
-    <h2 class="section-title">Book Jacko. Get stuff done.</h2>
-    <p class="section-lead">No invoices, no quotes, no faff. You send through a list, Jacko shows up, the list gets shorter.</p>
-    <div class="how-steps">
-      <div class="step">
-        <div class="step-n">01</div>
-        <h3>Fill in the form</h3>
-        <p>A rough idea of the jobs, your suburb, whether you've got the materials ready.</p>
-      </div>
-      <div class="step">
-        <div class="step-n">02</div>
-        <h3>Jacko reaches out</h3>
-        <p>He'll send a message, lock in a day, and work out anything he needs to bring.</p>
-      </div>
-      <div class="step">
-        <div class="step-n">03</div>
-        <h3>Day of. Done.</h3>
-        <p>Jacko rocks up, helps you knock it over, and you chip in a donation (around $500 for a full day) straight to the family.</p>
-      </div>
     </div>
   </div>
 </section>
@@ -1290,6 +1294,14 @@
 </footer>
 
 <script>
+  // Always start the page at the top on fresh load / reload
+  // (anchor links like #book still work because they trigger on click, not load)
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  if (!location.hash) window.scrollTo(0, 0);
+  window.addEventListener('load', () => {
+    if (!location.hash) window.scrollTo(0, 0);
+  });
+
   // Remove splash after animation
   setTimeout(() => {
     const s = document.querySelector('.splash');
@@ -1346,17 +1358,28 @@
   }
 
   // Jobs list — animate ticks on scroll (In Action section)
+  // Replays every time the section re-enters the viewport.
   const jobs = document.getElementById('jobsList');
   if (jobs && 'IntersectionObserver' in window) {
     const items = jobs.querySelectorAll('.pl-item');
+    let timers = [];
+    const clearTimers = () => { timers.forEach(t => clearTimeout(t)); timers = []; };
+    const reset = () => {
+      clearTimers();
+      items.forEach(el => el.classList.remove('revealed'));
+    };
+    const play = () => {
+      clearTimers();
+      items.forEach((el, i) => {
+        timers.push(setTimeout(() => el.classList.add('revealed'), i * 220));
+      });
+    };
     const obs = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting && jobs.dataset.observed === '0') {
-          jobs.dataset.observed = '1';
-          items.forEach((el, i) => {
-            setTimeout(() => el.classList.add('revealed'), i * 220);
-          });
-          obs.disconnect();
+        if (entry.isIntersecting) {
+          play();
+        } else {
+          reset();
         }
       });
     }, { threshold: 0.25 });
