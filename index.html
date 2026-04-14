@@ -174,13 +174,13 @@
   }
   .hero-visual img { width: 100%; height: 100%; object-fit: cover; }
   .hero-sticker {
-    position: absolute; bottom: -26px; left: -32px;
+    position: absolute; bottom: -32px; left: -44px;
     background: var(--mustard); color: var(--ink);
     font-family: 'DM Serif Display', serif;
-    font-size: 18px; padding: 14px 18px;
-    border-radius: 14px; box-shadow: var(--shadow-sm);
-    transform: rotate(-4deg);
-    z-index: 3;
+    font-size: 20px; padding: 16px 22px;
+    border-radius: 16px; box-shadow: 0 12px 28px rgba(34,56,42,.18);
+    transform: rotate(-5deg);
+    z-index: 5;
   }
   .hero-sticker b { display: block; font-size: 26px; line-height: 1; }
 
@@ -254,8 +254,8 @@
     .hero-video { max-width: 260px; border-radius: 18px; }
     .hero-play-ico { width: 64px; height: 64px; font-size: 22px; }
     .hero-play-label { font-size: 11px; padding: 6px 12px; }
-    .hero-sticker { font-size: 14px; padding: 10px 14px; bottom: -10px; left: -8px; }
-    .hero-sticker b { font-size: 20px; }
+    .hero-sticker { font-size: 15px; padding: 12px 16px; bottom: -22px; left: -18px; z-index: 5; }
+    .hero-sticker b { font-size: 22px; }
   }
   @media (max-width: 400px) {
     .wrap { padding: 0 18px; }
@@ -879,8 +879,8 @@
     <a href="#top" class="nav-logo">Just Call <span>Jacko.</span></a>
     <div class="nav-links">
       <a href="#why">Why</a>
-      <a href="#services">How</a>
       <a href="#meet-polly">Meet Polly</a>
+      <a href="#how">How</a>
       <a href="#action">In Action</a>
       <a href="#book" class="btn btn-primary nav-cta" style="padding:10px 20px;font-size:14px;color:var(--cream);">Book Jacko →</a>
     </div>
@@ -1098,6 +1098,32 @@
   </div>
 </section>
 
+<!-- How it works -->
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title">Book Jacko. Get stuff done.</h2>
+    <p class="section-lead">No invoices, no quotes, no faff. You send through a list, Jacko shows up, the list gets shorter.</p>
+    <div class="how-steps">
+      <div class="step">
+        <div class="step-n">01</div>
+        <h3>Fill in the form</h3>
+        <p>A rough idea of the jobs, your suburb, whether you've got the materials ready.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">02</div>
+        <h3>Jacko reaches out</h3>
+        <p>He'll send a message, lock in a day, and work out anything he needs to bring.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">03</div>
+        <h3>Day of. Done.</h3>
+        <p>Jacko rocks up, helps you knock it over, and you chip in a donation (around $500 for a full day) straight to the family.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- In Action -->
 <section class="action" id="action">
   <div class="wrap action-head">
@@ -1199,31 +1225,6 @@
   </div>
 </section>
 
-<!-- How -->
-<section class="how">
-  <div class="wrap">
-    <div class="section-label">How it works</div>
-    <h2 class="section-title">Book Jacko. Get stuff done.</h2>
-    <p class="section-lead">No invoices, no quotes, no faff. You send through a list, Jacko shows up, the list gets shorter.</p>
-    <div class="how-steps">
-      <div class="step">
-        <div class="step-n">01</div>
-        <h3>Fill in the form</h3>
-        <p>Quick details below — a rough idea of the jobs, your suburb, whether you've got the materials ready.</p>
-      </div>
-      <div class="step">
-        <div class="step-n">02</div>
-        <h3>Jacko reaches out</h3>
-        <p>He'll send a message, lock in a day, and work out anything he needs to bring.</p>
-      </div>
-      <div class="step">
-        <div class="step-n">03</div>
-        <h3>Day of. Done.</h3>
-        <p>Jacko rocks up, helps you knock it over, and you chip in a donation (around $500 for a full day) straight to the family.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- Book / Donate (stacked: chip-in first, book form below) -->
 <section class="split">
